@@ -123,11 +123,8 @@ sp2 = sqldf("select campaign_id,action,report_summary_open_rate,report_summary_c
 MyBarlot = function(indf , stili1, stili2, intitle, inxtitle, inytitle) {
   results = ggplot( data=indf, aes_string( x=stili1, y=stili2 )) +
     geom_bar(stat = "identity",position = "identity")+
-    #geom_smooth(colour="darkgreen")+
     theme_light() +
     scale_color_discrete("")+
-    #scale_x_continuous(limits= c(0.26,0.34) )+
-    #theme(plot.title=element_text(size=rel (1.2)))+
     labs(title=intitle, x=inxtitle, y=inytitle)+
     return(results)
 }
