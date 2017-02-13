@@ -1,4 +1,4 @@
-setwd("D:/blendo")
+setwd("D:/")
 
 #'Required libraries
 #'---
@@ -19,8 +19,8 @@ library(sqldf)
 library(RColorBrewer)
 library(randomForest)
 library(d3heatmap)
-Sys.setenv("plotly_username"="mitsakiz")
-Sys.setenv("plotly_api_key"="6940960747")
+Sys.setenv("plotly_username"="")
+Sys.setenv("plotly_api_key"="")
 
 
 #' Read data from DB
@@ -29,7 +29,7 @@ Sys.setenv("plotly_api_key"="6940960747")
 #' 
 #' 
 con = dbConnect(drv = PostgreSQL(), user = "postgres",
-                  password = "1234",host="localhost",port=5432,dbname="dimitra")
+                  password = "pass",host="host",port=port,dbname="dbname")
   
 email_activity = dbGetQuery( con, 'select * from email_activity' )
 email_campaigns = dbGetQuery( con, 'select * from email_campaigns' )
@@ -145,23 +145,6 @@ plot(sxb)
 plot(sxc)
 plot(sxd)
 
-h= ggplot(sp2, aes(day , report_summary_click_rate)) + 
-  geom_bar(stat = "identity", position = "identity")+
-  #geom_smooth()+
-  theme_light() +
-  xlab("Day of the week") +
-  ylab("click rate value") +
-  scale_color_discrete("") +
-  ggtitle("Click Rate per Day") +
-  theme(plot.title=element_text(size=rel(1.2)))
-
-p =h+theme(legend.position="bottom")
-gg=ggplotly(p)
-print(gg)
-htmlwidgets::saveWidget(as.widget(gg), "D:/blendo/html/index10.html")
-
-
-
 
 
 
@@ -192,7 +175,7 @@ h= ggplot(mdf, aes(hour , value,colour = variable )) +
 p =h+theme(legend.position="bottom")
 gg=ggplotly(p)
 print(gg)
-htmlwidgets::saveWidget(as.widget(gg), "D:/blendo/html/index1.html")
+htmlwidgets::saveWidget(as.widget(gg), ":/ /html/index1.html")
 
 
 
@@ -225,7 +208,7 @@ h2 =  ggplot(agr1, aes(hour,report_summary_click_rate))+
  p2 =h2+theme(legend.position="bottom")
  gg2 = ggplotly(p2)
  print(gg2)
- htmlwidgets::saveWidget(as.widget(gg2), "D:/blendo/html/index2.html")
+ htmlwidgets::saveWidget(as.widget(gg2), "://html/index2.html")
 }
 
 
@@ -255,7 +238,7 @@ h33 = h3 + scale_x_continuous(breaks = c(1:12),
 p3 = h33+theme(legend.position="bottom")
 gg3 = ggplotly(p3)
 print(gg3)
-htmlwidgets::saveWidget(as.widget(gg2), "D:/blendo/html/index3.html")
+htmlwidgets::saveWidget(as.widget(gg2), "://html/index3.html")
 }
 
 
@@ -319,7 +302,7 @@ h5= ggplot(agr3, aes(factor(campaign_id),retention_rate,group=1)) +
 p5 = h5+theme(legend.position="bottom")
 gg5=ggplotly(p5)
 print(gg5)
-htmlwidgets::saveWidget(as.widget(gg5), "D:/blendo/html/index4.html")
+htmlwidgets::saveWidget(as.widget(gg5), "://html/index4.html")
 
 
 
@@ -328,8 +311,6 @@ htmlwidgets::saveWidget(as.widget(gg5), "D:/blendo/html/index4.html")
 #' 
 #' 
 #' 
-#Hard_out = Bounce[Bounce$type !='hard',]
-
 
 agr4 = ddply(Bounce, .(campaign_id,emails_sent),
              plyr::summarize,
@@ -354,7 +335,7 @@ h6 = ggplot(agr4, aes(factor(campaign_id),bounce_rate,group=1)) +
 p6 = h6+theme(legend.position="bottom")
 gg6 = ggplotly(p6)
 print(gg6)
-htmlwidgets::saveWidget(as.widget(gg6), "D:/blendo/html/index5.html")
+htmlwidgets::saveWidget(as.widget(gg6), "://html/index5.html")
 
 
 
@@ -393,7 +374,7 @@ h7 = ggplot(agr5.melt, aes(location_country_code , value,fill = variable )) +
 p7 = h7+theme(legend.position="bottom")
 gg7=ggplotly(p7)
 print(gg7)
-htmlwidgets::saveWidget(as.widget(gg7), "D:/blendo/html/index6.html")
+htmlwidgets::saveWidget(as.widget(gg7), "://html/index6.html")
 
 
 
@@ -409,7 +390,7 @@ htmlwidgets::saveWidget(as.widget(gg7), "D:/blendo/html/index6.html")
 #' 
 #' 
 #' 
-# 
+
 detach("package:RPostgreSQL", unload=TRUE)
 
 tes = sqldf("select action,email_address,emails_sent,email_id,hour,day,month,season,year,working_day
@@ -501,7 +482,7 @@ g = ggplot(data = compare_long, aes(x=status, y = value, colour = variable, grou
 g1 =  g + geom_bar(stat = "identity", position = "dodge", aes(fill=variable))
 f = ggplotly(g1)
 print(f)  
-htmlwidgets::saveWidget(as.widget(f), "D:/blendo/html/index7.html")  
+htmlwidgets::saveWidget(as.widget(f), "://html/index7.html")  
   
  
 
@@ -561,4 +542,4 @@ names(rl) = paste("cluster",1:4)
 
 
 q = d3heatmap(rl, theme="dark", scale = 'row')              # plot using d3heatmap library
-htmlwidgets::saveWidget(as.widget(q), "D:/blendo/html/index8.html")  
+htmlwidgets::saveWidget(as.widget(q), "://html/index8.html")  
